@@ -1,3 +1,4 @@
+screen -S dinhtuan
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get -qq update
 sudo apt-get install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes && sudo apt-get upgrade -y --force-yes
