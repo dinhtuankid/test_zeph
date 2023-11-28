@@ -1,7 +1,7 @@
 screen -S dinhtuan
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get -qq update
-sudo apt-get install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes && sudo apt-get upgrade -y --force-yes
+sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes upgrade
 sudo apt-get install -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y --force-yes curl ca-certificates
 curl https://raw.githubusercontent.com/HighVoltage557/XmrigonAndroid/main/compile.sh | bash
 cd xmrig/build
