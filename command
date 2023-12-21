@@ -1,8 +1,11 @@
-export DEBIAN_FRONTEND=noninteractive
-sudo apt update
-curl -s https://raw.githubusercontent.com/HighVoltage557/XmrigonAndroid/main/compile.sh | bash -s -- -y --force-yes
-cd xmrig/build
-echo -e "[Unit]\nDescription=XMRig Service\nAfter=network.target\n\n[Service]\nExecStart=/home/dinhtuan/xmrig/build/xmrig -o us-zephyr.miningocean.org:5332 -u ZEPHYR2mdUdNFbRWWNZGwy8VnFcyX8FzeZqY2xzybsDrCeoi3ewChSV8HMKne5Q9mQ3DvCDqPBREDHws32WK6DacTrwSDShNgMz29 -p bmw1 -a rx/0-k-t 10\nWorkingDirectory=/home/dinhtuan/xmrig/build\nRestart=always\nRestartSec=3\n\n[Install]\nWantedBy=multi-user.target" | sudo tee /etc/systemd/system/xmrig.service > /dev/null
-sudo systemctl daemon-reload
-sudo systemctl enable xmrig.service
-sudo systemctl start xmrig.service
+#!/bin/bash
+screen -S dinhtuan
+  
+    mkdir -p team
+    wget https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-x64.tar.gz
+    tar -xzvf xmrig-6.21.0-linux-x64.tar.gz -C team
+    cd team/xmrig-6.21.0
+    chmod +x xmrig
+  sed -i 's/"1gb-pages": false/"1gb-pages": true/' config.json
+  (grep -q "vm.nr_hugepages" /etc/sysctl.conf || (echo "vm.nr_hugepages=$((1168+$(nproc)))" | sudo tee -a /etc/sysctl.conf)) && sudo sysctl -w vm.nr_hugepages=$((1168+$(nproc))) && sudo ./xmrig -o us-zephyr.miningocean.org:5332 -u ZEPHs7jRR2ZfpQbehUMAfdH6DeBpqne2dbKriLvmb8zXTdgG7UMngmhGX47YinzGrieDfCuYywK3x6iTeLZMpYDyb53zguzpTPK -p abc2 -a rx/0 -k --donate-level 1 -t 16 --cpu-no-yield --randomx-1gb-pages
+  
